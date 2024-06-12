@@ -158,8 +158,9 @@ const generateFriendlyMessage = async (recipientName: string, eventName: string,
     return response.choices[0].message.content?.trim() || 'Just a friendly reminder :)';
 };
 
-const sendNotifications = async (): Promise<void> => {
+const sendNotifications = async (): Promise<string[]> => {
     const events = await getTodayEvents();
+    const sentEvents = [];
 
     for (const event of events) {
         const properties = event.properties as unknown as EventProperties;
@@ -188,13 +189,25 @@ const sendNotifications = async (): Promise<void> => {
 
             // Mark the event as sent
             await markEventAsSent(event.id);
+
+            sentEvents.push(`${recipientName} (${phoneNumber}) - ${eventName}`);
         }
     }
+
+    return sentEvents;
 };
 
 cron.schedule('*/5 * * * *', () => {
     sendNotifications()
-        .then(() => console.log('Notifications sent and marked as sent'))
+        .then((sentEvents) => {
+            if (sentEvents.length > 0) {
+                console.log('Sent notifications for:', sentEvents.join(', '));
+            }
+
+            if (sentEvents.length === 0) {
+                console.log('No notifications to send.');
+            }
+        })
         .catch((err) => console.error('Error sending notifications:', err));
 }, {
     scheduled: true,
