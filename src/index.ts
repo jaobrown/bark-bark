@@ -113,7 +113,7 @@ const getTodayEvents = async (): Promise<any[]> => {
     return response.results.filter(event => {
         // @ts-expect-error
         const properties = event.properties as unknown as EventProperties;
-        const remindAt = properties['Remind at']?.date.start;
+        const remindAt = properties['Remind at']?.date?.start;
 
         if (remindAt) {
             const remindAtTime = dayjs(remindAt);
