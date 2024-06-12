@@ -18,11 +18,9 @@
     "dotenv": "^16.4.5",
     "node-cron": "^3.0.3",
     "openai": "^4.50.0",
-    "timezone": "link:dayjs/plugin/timezone",
     "ts-node": "^10.9.2",
     "twilio": "^5.1.1",
-    "typescript": "^5.4.5",
-    "utc": "link:dayjs/plugin/utc"
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
     "@types/node-cron": "^3.0.11"
