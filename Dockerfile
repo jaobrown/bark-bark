@@ -1,21 +1,24 @@
-# Use the official Node.js image.
-FROM node:21
+# Use the official Node.js image as a base
+FROM node:18
 
-# Create and change to the app directory.
+# Set the working directory
 WORKDIR /usr/src/app
 
-# Copy application dependency manifests to the container image.
-# A wildcard is used to ensure both package.json AND package-lock.json are copied.
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install production dependencies.
-RUN npm install --only=production
+# Install dependencies
+RUN npm install
 
-# Copy local code to the container image.
+# Copy the rest of the application code
 COPY . .
 
-# Run the web service on container startup.
-CMD [ "node", "index.js" ]
+# Install TypeScript globally and compile the TypeScript code
+RUN npm install -g typescript
+RUN tsc
 
-# Inform Docker that the container is listening on the specified port.
+# Expose the port the app runs on
 EXPOSE 3000
+
+# Command to run the application
+CMD ["node", "dist/index.js"]
