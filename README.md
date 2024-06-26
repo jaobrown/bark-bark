@@ -91,6 +91,23 @@ The Notion table for recipients should have the following properties:
 | Name     | Title       | Name of the recipient     |
 | Phone    | Phone Number| Phone number of the recipient |
 
+## Deployment
+
+### Docker Deployment
+This application can be deployed using Docker. The repository already includes a `Dockerfile`. To deploy the application with Docker, follow these steps:
+
+1. Build the Docker image:
+    ```sh
+    docker build -t friendly-reminder-bot .
+    ```
+
+2. Run the Docker container:
+    ```sh
+    docker run -d --env-file .env --name friendly-reminder-bot friendly-reminder-bot
+    ```
+
+   Ensure that your `.env` file is in the root of your project directory and contains all the required environment variables.
+
 ## Code Overview
 
 ### Initialization
