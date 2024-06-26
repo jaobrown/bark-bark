@@ -55,6 +55,42 @@ OPENAI_PROJECT_ID=your_openai_project_id
    ```
    The application will start a cron job that runs every 5 minutes to check for events and send reminders.
 
+## Expected Data Format in Notion
+
+### Events Database
+The Notion table for events should have the following properties:
+
+- **Recipient**: A relation property linking to the recipients database.
+- **Name**: A title property for the event name.
+- **Voice**: A rich text property for the voice or tone of the reminder.
+- **Note**: A rich text property for additional notes about the event.
+- **Date**: A date property for the event date.
+- **Sent**: A checkbox property indicating whether the reminder has been sent.
+- **Remind at** (optional): A date property for the specific time to send the reminder.
+
+### Example Event Entry
+| Property   | Type      | Description                                    |
+|------------|-----------|------------------------------------------------|
+| Recipient  | Relation  | Link to the recipient's entry in the recipients database |
+| Name       | Title     | Name of the event                              |
+| Voice      | Rich Text | Voice or tone of the reminder                  |
+| Note       | Rich Text | Additional notes about the event               |
+| Date       | Date      | Date and time of the event                     |
+| Sent       | Checkbox  | Checkbox to mark if the reminder has been sent |
+| Remind at  | Date      | Specific time to send the reminder (optional)  |
+
+### Recipients Database
+The Notion table for recipients should have the following properties:
+
+- **Name**: A title property for the recipient's name.
+- **Phone**: A phone number property for the recipient's phone number.
+
+### Example Recipient Entry
+| Property | Type        | Description               |
+|----------|-------------|---------------------------|
+| Name     | Title       | Name of the recipient     |
+| Phone    | Phone Number| Phone number of the recipient |
+
 ## Code Overview
 
 ### Initialization
